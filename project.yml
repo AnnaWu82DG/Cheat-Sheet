@@ -1,0 +1,47 @@
+name: CheatSheet
+options:
+  bundleIdPrefix: de.anna
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: Y6LS4R24Z2
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  CheatSheet:
+    type: application
+    platform: macOS
+    sources: [App, Shared]
+    dependencies:
+      - target: CheatSheetWidget
+    entitlements:
+      path: App/CheatSheet.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.anna.CheatSheet
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Cheat Sheet
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+  CheatSheetWidget:
+    type: app-extension
+    platform: macOS
+    sources: [Widget, Shared]
+    entitlements:
+      path: Widget/CheatSheetWidget.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Cheat Sheet
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.anna.CheatSheet.Widget
+        GENERATE_INFOPLIST_FILE: YES
